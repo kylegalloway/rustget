@@ -42,7 +42,7 @@ pub struct FtpDownload {
 impl FtpDownload {
     pub fn new(url: Url) -> Self {
         Self {
-            url: url,
+            url,
             hooks: Vec::new(),
         }
     }
@@ -133,12 +133,12 @@ impl HttpDownload {
                proxies: Option<HashMap<String, String>>)
                -> HttpDownload {
         HttpDownload {
-            url: url,
+            url,
             chunk_sz: 1024,
             hooks: Vec::new(),
-            headers: headers,
-            timeout: timeout,
-            proxies: proxies,
+            headers,
+            timeout,
+            proxies,
         }
     }
 

@@ -37,7 +37,7 @@ fn gen_filename(url: &Url, fname: Option<&str>) -> String {
             if name.is_empty() {
                 "index.html".to_owned()
             } else {
-                format!("{}", name)
+                name.to_string()
             }
         }
     }
@@ -79,7 +79,7 @@ fn get_http_proxies() -> Option<HashMap<String, String>> {
     }
 }
 
-pub fn ftp_download(url: Url, quiet_mode: bool, filename: Option<&str>) -> Result<(), Box<Error>> {
+pub fn ftp_download(url: &Url, quiet_mode: bool, filename: Option<&str>) -> Result<(), Box<Error>> {
     let fname = gen_filename(&url, filename);
 
     let mut client = FtpDownload::new(url.clone());
@@ -94,7 +94,7 @@ pub fn ftp_download(url: Url, quiet_mode: bool, filename: Option<&str>) -> Resul
 
 }
 
-pub fn http_download(url: Url, args: &ArgMatches, version: &str) -> Result<(), Box<Error>> {
+pub fn http_download(url: &Url, args: &ArgMatches, version: &str) -> Result<(), Box<Error>> {
     let resume_download = args.is_present("continue");
     let user_agent = args.value_of("AGENT").unwrap_or(&format!("Rustget/{}", version)).to_owned();
 
